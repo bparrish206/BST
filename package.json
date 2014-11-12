@@ -1,0 +1,11 @@
+{
+  "name": "trees",
+  "version": "1.0.0",
+  "description": "",
+  "main": "binaryTree.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "author": "",
+  "license": "ISC"
+}
