@@ -2,6 +2,7 @@ var Node = function(data, left, right){
   this.data = data;
   this.left = left;
   this.right = right;
+  this.count = 1;
 };
 
 Node.prototype.show =function(){
@@ -104,11 +105,17 @@ BST.prototype.find = function(data){
       return null;
     }
   }
-  return current;
+  return current; //&& current.count;
 };
 
 BST.prototype.remove = function(data){
   this.root = this.removeNode(this.root, data);
+};
+
+BST.prototype.update = function(data){
+  var word = this.find(data);
+  word.count++;
+  return word;
 };
 
 BST.prototype.removeNode = function(node, data){

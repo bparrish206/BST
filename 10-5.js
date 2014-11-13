@@ -2,19 +2,22 @@ var BST = require('./binaryTree');
 var fs = require('fs');
 var treeOfknwldg = new BST();
 
-fs.readFile('./text.txt', function(err, data){
+fs.readFile('./text.txt', 'utf-8', function(err, data){
   if(err) throw err;
-  console.log(data);
-  //for (var i =0; i <data.length; i++){
-    //var word = data[i];
-    //console.log(word);
-    //if (word) {
-      //treeOfknwldg.insert(word);
-    //}
-//  }
-
-  //orderdT = treeOfknwldg.preOrder();
-//console.log(orderdT);
-
-
+  var words = data.split(' ');
+  for (var i =0; i <words.length; i++){
+    var word = words[i];
+    var aword = treeOfknwldg.find(words);
+      if(word == null){
+        treeOfknwldg.insert(aword);
+      }
+      else {
+        treeOfknwldg.update(aword);
+      }
+    }
 });
+
+treeOfknwldg.insert(4);
+//console.log(words);
+console.log(treeOfknwldg.count);
+var test = treeOfknwldg.find('code');
