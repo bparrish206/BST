@@ -2,7 +2,7 @@ var Node = function(data, left, right){
   this.data = data;
   this.left = left;
   this.right = right;
-  this.count = 1;
+  this.cnt = 1;
 };
 
 Node.prototype.show =function(){
@@ -105,7 +105,7 @@ BST.prototype.find = function(data){
       return null;
     }
   }
-  return current; //&& current.count;
+  return current;
 };
 
 BST.prototype.remove = function(data){
@@ -114,7 +114,7 @@ BST.prototype.remove = function(data){
 
 BST.prototype.update = function(data){
   var word = this.find(data);
-  word.count++;
+  word.cnt++;
   return word;
 };
 

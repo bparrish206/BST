@@ -7,17 +7,17 @@ fs.readFile('./text.txt', 'utf-8', function(err, data){
   var words = data.split(' ');
   for (var i =0; i <words.length; i++){
     var word = words[i];
-    var aword = treeOfknwldg.find(words);
-      if(word == null){
-        treeOfknwldg.insert(aword);
+    var aword = treeOfknwldg.find(word);
+      if(!aword){
+        treeOfknwldg.insert(word);
       }
       else {
-        treeOfknwldg.update(aword);
+        treeOfknwldg.update(word);
       }
     }
 });
 
-treeOfknwldg.insert(4);
+//treeOfknwldg.insert(4);
 //console.log(words);
 console.log(treeOfknwldg.count);
 var test = treeOfknwldg.find('code');
