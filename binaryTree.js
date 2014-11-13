@@ -10,11 +10,12 @@ Node.prototype.show =function(){
 
 function BST(){
   this.root = null;
-  this.inOrder = inOrder;
+  this.count = 0;
 }
 
 BST.prototype.insert = function(data){
   var n = new Node(data, null, null);
+  this.count++;
   if(this.root === null){
     this.root = n;
   } else {
@@ -40,13 +41,13 @@ BST.prototype.insert = function(data){
   }
 };
 
-function inOrder(node){
-  if(!(node === null)){
-    inOrder(node.left);
+BST.prototype.inOrder = function(node){
+  if(!(node == null)){
+    this.inOrder(node.left);
     console.log(node.show() + " ");
-    inOrder(node.right);
+    this.inOrder(node.right);
   }
-}
+};
 
 var nums = new BST();
 nums.insert(23);
@@ -58,26 +59,21 @@ nums.insert(3);
 nums.insert(99);
 nums.insert(22);
 
-function preOrder(node){
-  if (!(node === null)){
-    console.log(node.show() + " ");
-    preOrder(node.left);
-    preOrder(node.right);
+BST.prototype.preOrder = function(node){
+  if (!(node == null)){
+    console.log(node.show() + ' ');
+    this.preOrder(node.left);
+    this.preOrder(node.right);
   }
-}
+};
 
-function postOrder(node){
-  if (!(node === null)) {
-    postOrder(node.left);
-    postOrder(node.right);
+BST.prototype.postOrder = function(node){
+  if (!(node == null)) {
+    this.postOrder(node.left);
+    this.postOrder(node.right);
     console.log(node.show() + " ");
   }
-}
-
-inOrder(nums.root);
-preOrder(nums.root);
-postOrder(nums.root);
-
+};
 
 BST.prototype.getMin = function(){
   var current = this.root;
@@ -95,19 +91,15 @@ BST.prototype.getMax = function(){
   return current.data;
 };
 
-var min = nums.getMin();
-var max = nums.getMax();
-
 BST.prototype.find = function(data){
   var current = this.root;
-  while (current.data != data){
+  while (current && current.data != data){
     if (data < current.data){
       current = current.left;
     }
     else {
       current = current.right;
     }
-
     if (current === null){
       return null;
     }
@@ -116,7 +108,7 @@ BST.prototype.find = function(data){
 };
 
 BST.prototype.remove = function(data){
-  root = removeNode(this.root, data);
+  this.root = this.removeNode(this.root, data);
 };
 
 BST.prototype.removeNode = function(node, data){

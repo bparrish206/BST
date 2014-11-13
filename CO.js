@@ -1,4 +1,5 @@
 var Tree = require('./binaryTree');
+var fs = require('fs');
 
 Tree.prototype.Node = function(data, left, right){
   this.data = data;
@@ -18,7 +19,7 @@ Tree.prototype.update = function(data){
   console.log(arr[0].toString() + ' ');
   for (var i = 1; i < arr.lenght; ++i){
     console.log(arr[i].toString() + ' ');
-    if (i % 10 == 0){
+    if (i % 10 === 0){
       console.log("\n");
     }
   }
@@ -50,7 +51,7 @@ var count = "y";
 
 while (count == "y"){
   console.log("\n\nEnter a grade: ");
-  var g = parseInt(readline());
+  var g = 66;
   var aGrade = gradedistro.find(g);
   if(aGrade === null) {
     console.log("No occurences of " + g);
@@ -59,5 +60,6 @@ while (count == "y"){
     console.log("Occurrences of " + g + ": " + aGrade.count);
   }
   console.log("Look at another grade (y/n)? ");
-  count = readline();
+
+  count = 'n';
 }
