@@ -15,5 +15,6 @@ module.exports = function(grunt){
       src: ['test/test.js']
     }
   });
-  grunt.registerTask('default', ['unicorn', 'simplemocha']);
+  //grunt.registerTask('unicorn', ['unicorn']);
+  grunt.registerTask('default', ['simplemocha']);
 };
