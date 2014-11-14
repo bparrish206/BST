@@ -119,9 +119,9 @@ BST.prototype.update = function(data){
 };
 
 BST.prototype.removeNode = function(node, data){
-  var tempNode = getSmallest(node.right);
+  var tempNode = this.getMin(node.right);
   node.data = tempNode.data;
-  node.right = removeNode(node.right, tempNode.data);
+  node.right = this.removeNode(node.right, tempNode.data);
 
   if (node=== null){
     return null;

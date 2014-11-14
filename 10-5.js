@@ -8,16 +8,22 @@ fs.readFile('./text.txt', 'utf-8', function(err, data){
   for (var i =0; i <words.length; i++){
     var word = words[i];
     var aword = treeOfknwldg.find(word);
-      if(!aword){
-        treeOfknwldg.insert(word);
-      }
-      else {
-        treeOfknwldg.update(word);
-      }
+    treeOfknwldg.insert(words[i]);
+    treeOfknwldg.insert(word);
+    treeOfknwldg.insert(1);
+    //if(aword ===  null){
+
+    //}
+    //else {
+      //treeOfknwldg.update(word);
+      //}
     }
 });
 
-//treeOfknwldg.insert(4);
+treeOfknwldg.insert(4);
+treeOfknwldg.insert(8);
 //console.log(words);
 console.log(treeOfknwldg.count);
 var test = treeOfknwldg.find('code');
+console.log(test);
+treeOfknwldg.remove(4);
