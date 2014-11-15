@@ -1,22 +1,22 @@
-function Node(data, left, right){
+var Node = function(data, left, right){
   this.data = data;
   this.left = left;
   this.right = right;
-  this.show = show;
-}
+  this.count = 1;
+};
 
-function show(){
+Node.prototype.show =function(){
   return this.data;
-}
+};
 
 function BST(){
   this.root = null;
-  this.insert = insert;
-  this.inOrder = inOrder;
+  this.tcount = 0;
 }
 
-function insert(data){
+BST.prototype.insert = function(data){
   var n = new Node(data, null, null);
+  this.tcount++;
   if(this.root === null){
     this.root = n;
   } else {
@@ -40,15 +40,16 @@ function insert(data){
       }
     }
   }
-}
+};
 
-function inOrder(node){
-  if(!(node === null)){
-    inOrder(node.left);
+
+BST.prototype.inOrder = function(node){
+  if(!(node == null)){
+    this.inOrder(node.left);
     console.log(node.show() + " ");
-    inOrder(node.right);
+    this.inOrder(node.right);
   }
-}
+};
 
 var nums = new BST();
 nums.insert(23);
@@ -60,28 +61,21 @@ nums.insert(3);
 nums.insert(99);
 nums.insert(22);
 
-function preOrder(node){
-  if (!(node === null)){
-    console.log(node.show() + " ");
-    preOrder(node.left);
-    preOrder(node.right);
+BST.prototype.preOrder = function(node){
+  if (!(node == null)){
+    console.log(node.show() + ' ');
+    this.preOrder(node.left);
+    this.preOrder(node.right);
   }
-}
+};
 
-function postOrder(node){
-  if (!(node === null)) {
-    postOrder(node.left);
-    postOrder(node.right);
+BST.prototype.postOrder = function(node){
+  if (!(node == null)) {
+    this.postOrder(node.left);
+    this.postOrder(node.right);
     console.log(node.show() + " ");
   }
-}
-
-inOrder(nums.root);
-
-preOrder(nums.root);
-
-postOrder(nums.root);
-
+};
 
 BST.prototype.getMin = function(){
   var current = this.root;
@@ -99,20 +93,15 @@ BST.prototype.getMax = function(){
   return current.data;
 };
 
-var min = nums.getMin();
-
-var max = nums.getMax();
-
 BST.prototype.find = function(data){
   var current = this.root;
-  while(current.data != data){
+  while (current && current.data != data){
     if (data < current.data){
       current = current.left;
     }
     else {
       current = current.right;
     }
-
     if (current === null){
       return null;
     }
@@ -121,30 +110,36 @@ BST.prototype.find = function(data){
 };
 
 BST.prototype.remove = function(data){
-  root = removeNode(this.root, data);
+  this.root = this.removeNode(this.root, data);
+};
+
+BST.prototype.update = function(node){
+  node++;
 };
 
 BST.prototype.removeNode = function(node, data){
+
   if (node=== null){
     return null;
   }
 
   if (data == node.data){
-    if(node.left == null && node.right == null){
+    if(node.left === null && node.right === null){
       return null;
     }
-    if (node.left = null){
+    if (node.left === null){
       return node.right;
     }
 
-    if(node.right = null){
+    if(node.right === null){
       return node.left;
   }
-    var tempNode = getSmallest(node.right);
-    node.data = tempNode.data;
-    node.right = removeNode(node.right, tempNode.data);
 
-  else if (data < node.data){
+  var tempNode = this.getMin(node.right);
+  node.data = tempNode.data;
+  node.right = this.removeNode(node.right, tempNode.data);
+  return node;
+} else if (data < node.data){
     node.left = removeNode(node.left, data);
     return node;
   }
@@ -152,5 +147,7 @@ BST.prototype.removeNode = function(node, data){
     node.right = removeNode(node.right, data);
     return node;
   }
-  }
 };
+
+
+module.exports = BST;

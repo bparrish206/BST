@@ -1,0 +1,7 @@
+This is a word file to test.  Coding is cool!
+
+Code Fellows is the binary school!
+
+Recursion calls itself the new rule!
+
+Use data structures or count like a fool!
