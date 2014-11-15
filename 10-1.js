@@ -14,4 +14,4 @@ nums.insert(3);
 nums.insert(99);
 nums.insert(22);
 
-console.log(nums.count);
+console.log(nums.tcount);

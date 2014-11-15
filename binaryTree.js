@@ -2,7 +2,7 @@ var Node = function(data, left, right){
   this.data = data;
   this.left = left;
   this.right = right;
-  this.cnt = 1;
+  this.count = 1;
 };
 
 Node.prototype.show =function(){
@@ -11,12 +11,12 @@ Node.prototype.show =function(){
 
 function BST(){
   this.root = null;
-  this.count = 0;
+  this.tcount = 0;
 }
 
 BST.prototype.insert = function(data){
   var n = new Node(data, null, null);
-  this.count++;
+  this.tcount++;
   if(this.root === null){
     this.root = n;
   } else {
@@ -41,6 +41,7 @@ BST.prototype.insert = function(data){
     }
   }
 };
+
 
 BST.prototype.inOrder = function(node){
   if(!(node == null)){
@@ -112,16 +113,11 @@ BST.prototype.remove = function(data){
   this.root = this.removeNode(this.root, data);
 };
 
-BST.prototype.update = function(data){
-  var word = this.find(data);
-  word.cnt++;
-  return word;
+BST.prototype.update = function(node){
+  node++;
 };
 
 BST.prototype.removeNode = function(node, data){
-  var tempNode = this.getMin(node.right);
-  node.data = tempNode.data;
-  node.right = this.removeNode(node.right, tempNode.data);
 
   if (node=== null){
     return null;
@@ -139,7 +135,11 @@ BST.prototype.removeNode = function(node, data){
       return node.left;
   }
 
-  else if (data < node.data){
+  var tempNode = this.getMin(node.right);
+  node.data = tempNode.data;
+  node.right = this.removeNode(node.right, tempNode.data);
+  return node;
+} else if (data < node.data){
     node.left = removeNode(node.left, data);
     return node;
   }
@@ -147,7 +147,7 @@ BST.prototype.removeNode = function(node, data){
     node.right = removeNode(node.right, data);
     return node;
   }
-  }
 };
+
 
 module.exports = BST;
